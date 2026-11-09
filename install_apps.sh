@@ -1,7 +1,9 @@
 #!/bin/bash
 
 draw_line() {
-    printf '%*s\n' "$(tput cols)" '' | tr ' ' '='
+    local cols
+    cols=$(tput cols 2>/dev/null || echo 90)
+    printf '%*s\n' "$cols" '' | tr ' ' '='
 }
 ARCH="$(dpkg --print-architecture)"
 EXT=("deb" "sh" "tar.gz")

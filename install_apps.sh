@@ -122,16 +122,15 @@ done
 draw_line
 read -rp "Enter your choice [1-62]: " choice
 case $choice in
+ 1)
+  URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb"
+  FILENAME="Bitwarden-*-${ARCH}.deb"
+  ;;
 
-  1)
-    URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb"
-    FILENAME="Bitwarden-*-${ARCH}.deb"
-    ;;
-
-  2)
-    URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb"
-    FILENAME="Discord.deb"
-    ;;
+ 2)
+  URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb"
+  FILENAME="Discord.deb"
+  ;;
 
   3)
     curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg

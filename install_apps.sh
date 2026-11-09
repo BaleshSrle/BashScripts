@@ -122,31 +122,35 @@ done
 draw_line
 read -rp "Enter your choice [1-62]: " choice
 case $choice in
-    
- 1)
+
+  1)
     URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb"
     FILENAME="Bitwarden-*-${ARCH}.deb"
     ;;
 
-    2)
-        URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb"
-        FILENAME="Discord.deb"
-        ;;
-    3)
-        curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-	    # cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-	    # sudo install -m 644 signal-desktop-keyring.gpg /usr/share/keyrings/signal-desktop-keyring.gpg
-	    echo signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null ; curl -o signal-dektop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
-	    # cat signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
-	    # sudo install -m 644 signal.desktop.sources /etc/apt/sources.list.d/signal-desktop.sources
-	    echo signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null ; sudo apt update && sudo apt install signal-desktop
-        ;;
-    4)
-        URL="https://downloads.slack-edge.com/desktop-releases/linux/x64/4.53.276/slack-desktop-4.53.276-${ARCH}.deb"
-        FILENAME="slack-desktop-*-${ARCH}.deb";;
-    5)
-        FLATPAK_APP="org.telegram.desktop"
-        ;;  
+  2)
+    URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb"
+    FILENAME="Discord.deb"
+    ;;
+
+  3)
+    curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
+    # cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+	# sudo install -m 644 signal-desktop-keyring.gpg /usr/share/keyrings/signal-desktop-keyring.gpg
+	echo signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null ; curl -o signal-dektop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
+	# cat signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
+	# sudo install -m 644 signal.desktop.sources /etc/apt/sources.list.d/signal-desktop.sources
+	echo signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null ; sudo apt update && sudo apt install signal-desktop
+    ;;
+
+  4)
+    URL="https://downloads.slack-edge.com/desktop-releases/linux/x64/4.53.276/slack-desktop-4.53.276-${ARCH}.deb"
+    FILENAME="slack-desktop-*-${ARCH}.deb"
+    ;;
+
+  5)
+    FLATPAK_APP="org.telegram.desktop"
+    ;;  
     6)
         URL="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
         FILENAME="viber.deb"

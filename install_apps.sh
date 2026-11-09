@@ -122,21 +122,41 @@ done
 draw_line
 read -rp "Enter your choice [1-62]: " choice
 case $choice in
-1)URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb" FILENAME="Bitwarden-*-${ARCH}.deb" ;;
-2)URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb" FILENAME="Discord.deb" ;;
-3)
-    curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-	# cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-	# sudo install -m 644 signal-desktop-keyring.gpg /usr/share/keyrings/signal-desktop-keyring.gpg
-	echo signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null ; curl -o signal-dektop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
-	# cat signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
-	# sudo install -m 644 signal.desktop.sources /etc/apt/sources.list.d/signal-desktop.sources
-	echo signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null ; sudo apt update && sudo apt install signal-desktop ;;
-4)  URL="https://downloads.slack-edge.com/desktop-releases/linux/x64/4.53.276/slack-desktop-4.53.276-${ARCH}.deb" FILENAME="slack-desktop-*-${ARCH}.deb" ;;
-5)  FLATPAK_APP="org.telegram.desktop" ;;
-6)  URL="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb" FILENAME="viber.deb" ;;
-7)  URL="https://binaries.webex.com/WebexDesktop-Ubuntu-Official-Package/Webex.deb" FILENAME="Webex.deb" ;;
-8)  URL="https://cdn.zoom.us/prod/7.2.5.6661/zoom_${ARCH}.deb" FILENAME="zoom_${ARCH}.deb" ;;
+    1)
+        URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb"
+        FILENAME="Bitwarden-*-${ARCH}.deb"
+        ;;
+    2)
+        URL="https://stable.dl2.discordapp.net/distro/app/stable/linux/x64/1.0.168/Discord.deb"
+        FILENAME="Discord.deb"
+        ;;
+    3)
+        curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
+	    # cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+	    # sudo install -m 644 signal-desktop-keyring.gpg /usr/share/keyrings/signal-desktop-keyring.gpg
+	    echo signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null ; curl -o signal-dektop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
+	    # cat signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
+	    # sudo install -m 644 signal.desktop.sources /etc/apt/sources.list.d/signal-desktop.sources
+	    echo signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null ; sudo apt update && sudo apt install signal-desktop
+        ;;
+    4)
+        URL="https://downloads.slack-edge.com/desktop-releases/linux/x64/4.53.276/slack-desktop-4.53.276-${ARCH}.deb"
+        FILENAME="slack-desktop-*-${ARCH}.deb";;
+    5)
+        FLATPAK_APP="org.telegram.desktop"
+        ;;  
+    6)
+        URL="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
+        FILENAME="viber.deb"
+        ;;
+    7)
+        URL="https://binaries.webex.com/WebexDesktop-Ubuntu-Official-Package/Webex.deb"
+        FILENAME="Webex.deb"
+        ;;
+    8)
+        URL="https://cdn.zoom.us/prod/7.2.5.6661/zoom_${ARCH}.deb"
+        FILENAME="zoom_${ARCH}.deb"
+        ;;
     9) URL="https://dl.google.com/linux/direct/google-chrome-stable_current_${ARCH}.deb" FILENAME="google-chrome-stable_current_${ARCH}.deb" ;;
     10) URL="https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_157.0.4341.42-1_${ARCH}.deb" FILENAME="microsoft-edge-stable_*-1_${ARCH}.deb" ;;
     11) URL="https://get.opera.com/ftp/pub/opera/desktop/139.0.6053.22/linux/opera-stable_139.0.6053.22_${ARCH}.deb" FILENAME="opera-stable_*_${ARCH}.deb" ;;

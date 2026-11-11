@@ -10,9 +10,6 @@ EXT=("deb" "sh" "tar.gz")
 
 cd /tmp || exit
 
-# if command -v wget &> /dev/null; then
-#	DL_TOOL="wget -P ./ --https-only -4 --no-cache --no-cookies"
-# fi
 
 # shellcheck disable=SC1091
 
@@ -24,7 +21,6 @@ draw_line
 echo -e "		Application Installer for $PRETTY_NAME $DESKTOP_SESSION		"
 draw_line
 echo "Select applications that you want to download and install:"
-# Define all 50 options in an array
 options=(
     "1. Bitwarden Desktop App"
     "2. Discord"
@@ -53,7 +49,7 @@ options=(
     "25. Rclone"
     "26. ghostwriter"
     "27. Simplenote"
-    "28. Wordpress Desktop App"
+    "28. WordPress Desktop App"
     "29. LibreOffice"
     "30. WPS Office"
     "31. LocalSend"
@@ -90,29 +86,24 @@ options=(
     "62. EXIT"
 )
 
-# Set your fixed column width here (adjust as needed)
 col_width=28
 
 total=${#options[@]}
 rows=$(( (total + 2) / 3 ))
 
-# Process row by row
 for ((i=0; i<rows; i++)); do
     item1="${options[i]:-}"
     item2="${options[i + rows]:-}"
     item3="${options[i + rows * 2]:-}"
 
-    # Wrap each item to the fixed column width using 'fold' (-s wraps on spaces)
     mapfile -t lines1 < <(echo "$item1" | fold -s -w "$col_width")
     mapfile -t lines2 < <(echo "$item2" | fold -s -w "$col_width")
     mapfile -t lines3 < <(echo "$item3" | fold -s -w "$col_width")
 
-    # Find the maximum number of lines required for this specific row
     max_lines=${#lines1[@]}
     (( ${#lines2[@]} > max_lines )) && max_lines=${#lines2[@]}
     (( ${#lines3[@]} > max_lines )) && max_lines=${#lines3[@]}
 
-    # Print line-by-line so wrapped text aligns properly
     for ((l=0; l<max_lines; l++)); do
         l1="${lines1[l]:-}"
         l2="${lines2[l]:-}"
@@ -137,12 +128,10 @@ case $choice in
 
     3)
         curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-        # cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-	    # sudo install -m 644 signal-desktop-keyring.gpg /usr/share/keyrings/signal-desktop-keyring.gpg
-	    echo signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null ; curl -o signal-dektop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
-	    # cat signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
-	    # sudo install -m 644 signal.desktop.sources /etc/apt/sources.list.d/signal-desktop.sources
-	    echo signal.desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null ; sudo apt update && sudo apt install signal-desktop
+        cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+        curl -o signal-desktop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
+        cat signal-desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
+        sudo apt update && sudo apt install signal-desktop
         ;;
 
     4)
@@ -175,22 +164,22 @@ case $choice in
         ;;
 
     10)
-        URL="https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_157.0.4341.42-1_${ARCH}.deb"
+        URL="https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_157.0.4341.46-1_${ARCH}.deb"
         FILENAME="microsoft-edge-stable_*-1_${ARCH}.deb"
         ;;
 
     11)
-        URL="https://get.opera.com/ftp/pub/opera/desktop/139.0.6053.22/linux/opera-stable_139.0.6053.22_${ARCH}.deb"
+        URL="https://get.opera.com/ftp/pub/opera/desktop/140.0.6074.17/linux/opera-stable_140.0.6074.17_${ARCH}.deb"
         FILENAME="opera-stable_*_${ARCH}.deb"
         ;;
 
     12)
-        URL="https://downloads.vivaldi.com/stable/vivaldi-stable_8.3.4191.30-1_${ARCH}.deb"
+        URL="https://downloads.vivaldi.com/stable/vivaldi-stable_8.3.4191.35-1_${ARCH}.deb"
         FILENAME="vivaldi-stable_*-1_${ARCH}.deb"
         ;;
 
     13)
-        URL="https://vscode.download.prss.microsoft.com/dbazure/download/stable/c4453f8ea430795f941c1b2ff6c9321135a74a02/code_1.145.2-1793945276_${ARCH}.deb"
+        URL="https://vscode.download.prss.microsoft.com/dbazure/download/stable/dcd3ad6e368fbe19d03f37054a40dbaf40d676f4/code_1.145.3-1794015171_${ARCH}.deb"
         FILENAME="code_*-*_${ARCH}.deb"
         ;;
 
@@ -263,7 +252,7 @@ case $choice in
         FILENAME="wordpress.com-linux-deb-*.deb"
         ;;
     29)
-        wget -P ./ --https-only -4 --no-cache --no-cookies "https://download.documentfoundation.org/libreoffice/stable/26.8.1/deb/x86_64/LibreOffice_26.8.1_Linux_x86-64_deb.tar.gz" ; wget -P ./ --https-only -4 --no-cache --no-cookies "https://download.documentfoundation.org/libreoffice/stable/26.8.1/deb/x86_64/LibreOffice_26.8.1_Linux_x86-64_deb_langpack_sr.tar.gz" ; tar zxvf ./LibreOffice_*_Linux_x86-64_deb.tar.gz ; tar zxvf ./LibreOffice_*_Linux_x86-64_deb_langpack_*.tar.gz ; mv LibreOffice_*_Linux_x86-64_deb_langpack_*/DEBS/*deb LibreOffice_*_Linux_x86-64_Deb/DEBS/ ; sudo dpkg -i ./LibreOffice_*_Linux_x86-64_deb/DEBS/*.deb ; rm -r ./LibreOffice_*_Linux_x86-64_deb_langpack_* ; rm -r ./LibreOffice_*_Linux_x86-64_deb
+        wget -P ./ --https-only -4 --no-cache --no-cookies "https://download.documentfoundation.org/libreoffice/stable/26.8.2/deb/x86_64/LibreOffice_26.8.2_Linux_x86-64_deb.tar.gz" ; wget -P ./ --https-only -4 --no-cache --no-cookies "https://download.documentfoundation.org/libreoffice/stable/26.8.2/deb/x86_64/LibreOffice_26.8.2_Linux_x86-64_deb_langpack_sr.tar.gz" ; tar zxvf ./LibreOffice_*_Linux_x86-64_deb.tar.gz ; tar zxvf ./LibreOffice_*_Linux_x86-64_deb_langpack_*.tar.gz ; mv LibreOffice_*_Linux_x86-64_deb_langpack_*/DEBS/*deb LibreOffice_*_Linux_x86-64_deb/DEBS/ ; sudo dpkg -i ./LibreOffice_*_Linux_x86-64_deb/DEBS/*.deb ; rm -r ./LibreOffice_*_Linux_x86-64_deb_langpack_* ; rm -r ./LibreOffice_*_Linux_x86-64_deb
         ;;
 
     30)
@@ -416,9 +405,27 @@ case $choice in
 esac
 
 if [ -n "$URL" ]; then
-   # "$DL_TOOL" "$URL" && sudo apt install "./$FILENAME"
-    # shellcheck disable=SC2086
-    wget -P ./ --https-only -4 --no-cache --no-cookies "$URL" ; sudo apt install ./$FILENAME
+    if ! wget -P ./ --https-only -4 --no-cache --no-cookies "$URL"; then
+        echo "Download Failed: $URL" >&2
+        exit 1
+    fi
+
+    shopt -s nullglob
+    mapfile -t files < <(compgen -G "./$FILENAME" || :)
+    # files=( ./$FILENAME )
+    shopt -u nullglob
+
+    if (( ${#files[@]} == 0 )); then
+        echo "Error: no downloaded file matches: $FILENAME" >&2
+        exit 1
+    elif (( ${#files[@]} > 1 )); then
+        echo "Error: multiple files matches: $FILENAME" >&2
+        printf '  %s\n' "${files[@]}" >&2
+        exit 1
+    fi
+
+    sudo apt install "${files[0]}"
+    # wget -P ./ --https-only -4 --no-cache --no-cookies "$URL" ; sudo apt install ./$FILENAME
 elif [ -n "$PACKAGE" ]; then
 	sudo apt install "$PACKAGE"
 elif [ -n "$FLATPAK_APP" ]; then

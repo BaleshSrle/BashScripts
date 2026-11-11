@@ -115,7 +115,6 @@ done
 draw_line
 read -rp "Enter your choice [1-62]: " choice;
 case $choice in
-
     1)
         URL="https://github.com/bitwarden/clients/releases/download/desktop-v2026.10.4/Bitwarden-2026.10.4-${ARCH}.deb"
         FILENAME="Bitwarden-*-${ARCH}.deb"

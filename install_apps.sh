@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# draw_line() {
-#     local cols
-#     cols=$(tput cols 2>/dev/null || echo 90)
-#     printf '%*s\n' "$cols" '' | tr ' ' '='
-# }
+draw_line() {
+    local cols
+    cols=$(tput cols 2>/dev/null || echo 90)
+    printf '%*s\n' "$cols" '' | tr ' ' '='
+}
 ARCH="$(dpkg --print-architecture)"
 EXT=("deb" "sh" "tar.gz")
 
@@ -17,9 +17,9 @@ if [ -f /etc/os-release ]; then
 	. /etc/os-release
 fi
 
-echo -e "======================================================================="
-echo -e "		 Application Installer for $PRETTY_NAME $DESKTOP_SESSION		"
-echo -e "======================================================================="
+draw_line
+echo -e "		Application Installer for $PRETTY_NAME $DESKTOP_SESSION		"
+draw_line
 echo "Select applications that you want to download and install:"
 options=(
     "1. Bitwarden Desktop App"
@@ -112,7 +112,7 @@ for ((i=0; i<rows; i++)); do
         printf "%-*s  %-*s  %-s\n" "$col_width" "$l1" "$col_width" "$l2" "$l3"
     done
 done
-echo -e "======================================================================="
+draw_line
 read -rp "Enter your choice [1-62]: " choice
 case "$choice" in
     1)
